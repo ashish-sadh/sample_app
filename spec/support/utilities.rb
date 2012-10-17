@@ -1,5 +1,5 @@
 def full_title(page_title)
-  base_title = "Humantra for humans"
+  base_title = "InternVilla"
   if page_title.empty?
     base_title
   else
