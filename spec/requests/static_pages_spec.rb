@@ -7,7 +7,7 @@ describe "Static pages" do
   describe "Home page" do
     before { visit root_path }
 
-    it { should have_selector('h1',    text: 'Better than Humantra') }
+    it { should have_selector('h1',    text: 'Looking for a good intern?') }
     it { should have_selector('title', text: full_title('')) }
     it { should_not have_selector 'title', text: '| Home' }
   end
@@ -33,5 +33,3 @@ describe "Static pages" do
     it { should have_selector('title', text: full_title('Contact Us')) }
   end
 end
-
-
