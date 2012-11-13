@@ -5,6 +5,9 @@ class StaticPagesController < ApplicationController
       @micropost  = current_user.microposts.build
       @feed_items = current_user.feed.paginate(page: params[:page])
     end
+    
+    @search_results = Micropost.paginate(page: params[:page])
+
   end
 
   def help

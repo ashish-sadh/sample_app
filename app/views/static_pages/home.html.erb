@@ -12,7 +12,7 @@
       <h3>Active Internship Posts</h3>
       <%= render 'shared/feed' %>
     </div>
-  </div>  
+  </div>
 <% else %>
 
 <div class="center hero-unit">
@@ -27,5 +27,28 @@
   <%= link_to "Sign Up Now!", signup_path, class: "btn btn-large btn-primary" %>
 </div>
 
+<h1>Internships for You</h1>
+
+
+<div class="row">
+	<%= will_paginate @search_results %>
+	<ol class="microposts">
+		<% @search_results.each do |search_result| %>
+		<li id="<%= search_result.id %>">
+			<%= link_to gravatar_for(search_result.user), search_result.user %>
+			<span class="user">
+				<%= link_to search_result.user.name, search_result.user %>
+			</span>
+			<span class="content"><%= search_result.content %></span>
+			<span class="timestamp">
+				Posted <%= time_ago_in_words(search_result.created_at) %> ago.
+			</span>
+			<%= link_to "Apply Now", search_result.user %>
+		</li>
+		<% end %>
+	</ol>
+	<%= will_paginate @search_results %>
+</div>
+
 <!-- <%= link_to image_tag("naukri.jpeg", alt: "Naukri.com"), 'http://naukri.com' %> -->
-<% end %> 
+<% end %>

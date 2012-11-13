@@ -21,7 +21,9 @@ class UsersController < ApplicationController
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to the InternVilla!"
-      redirect_to @user
+      redirect_to(root_path)
+      #redirect_to @user #My change
+      
       # Handle a successful save.
     else
       render 'new'
