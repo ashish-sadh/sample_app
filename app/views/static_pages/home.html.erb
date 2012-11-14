@@ -27,11 +27,41 @@
   <%= link_to "Sign Up Now!", signup_path, class: "btn btn-large btn-primary" %>
 </div>
 
-<h1>Internships for You</h1>
+<!-- <h1>Internships for You</h1> -->
 
 
 <div class="row">
-	<%= will_paginate @search_results %>
+	<div class="center">
+	<aside class="span8">
+		<div class="span6">
+		<%= form_tag("/search", :method => "get") do %>
+		<%= text_field_tag(:q) %>
+		<%= submit_tag("Search Internships",class: "btn btn-large btn-primary")%>
+		<% end %>
+		</div>
+		<% if @results and not @results.empty? %>
+  			<% @results.each do |result| %>  
+    			<li id="<%= result.id %>">
+                        <%= link_to gravatar_for(result.user), result.user %>
+                        <span class="user">
+                                <%= link_to result.user.name, result.user %>
+                        </span>
+                        <span class="content"><%= result.content %></span>
+                        <span class="timestamp">
+                                Posted <%= time_ago_in_words(result.created_at) %> ago.
+                        </span>
+                        <%= link_to "Apply Now", result.user %>
+                	</li>
+
+			<%end%>
+		<%end%>
+
+		<!-- <h1> Search Internships for You</h1> -->
+	</aside>
+	</div>
+	<div class="span4">
+	<h3>Recent Internships</h3>
+	<div class = "some-container">
 	<ol class="microposts">
 		<% @search_results.each do |search_result| %>
 		<li id="<%= search_result.id %>">
@@ -47,7 +77,9 @@
 		</li>
 		<% end %>
 	</ol>
-	<%= will_paginate @search_results %>
+	</div>
+	<%# will_paginate @search_results %>
+	</div>
 </div>
 
 <!-- <%= link_to image_tag("naukri.jpeg", alt: "Naukri.com"), 'http://naukri.com' %> -->

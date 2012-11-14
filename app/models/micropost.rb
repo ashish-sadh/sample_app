@@ -5,4 +5,9 @@ class Micropost < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 250 }
 
   default_scope order: 'microposts.created_at DESC'
+
+def self.search(search)
+  search.blank? ? [] : all(:conditions => ['name LIKE ?', "%#{search.strip}%"])
+end
+
 end
