@@ -5,8 +5,8 @@ class StaticPagesController < ApplicationController
       @micropost  = current_user.microposts.build
       @feed_items = current_user.feed.paginate(page: params[:page])
     end
-    @search_results = Micropost.all
-    #@search_results = Micropost.paginate(page: params[:page])
+    #@search_results = Micropost.all
+    @search_results = Micropost.paginate(page: params[:page])
 
   end
 
@@ -20,9 +20,11 @@ class StaticPagesController < ApplicationController
   end
 
   def search
-	@results = Micropost.all
+	#@results = Micropost.all
+	@results = Micropost.paginate(page: params[:page])
 	#@results = Micropost.search(params[:search])
-	redirect_to root_url	
+	redirect_to root_url
+	@results
   end
 
 end

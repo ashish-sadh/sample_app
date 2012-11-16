@@ -31,17 +31,22 @@
 
 
 <div class="row">
-	<div class="center">
 	<aside class="span8">
+	 <div class="center">
 		<div class="span6">
 		<%= form_tag("/search", :method => "get") do %>
 		<%= text_field_tag(:q) %>
-		<%= submit_tag("Search Internships",class: "btn btn-large btn-primary")%>
+		<%= submit_tag("InternVilla Search",class: "btn btn-large btn-primary")%>
+		<%= submit_tag("Web Search",class: "btn btn-large btn-primary")%>
 		<% end %>
 		</div>
-		<% if @results and not @results.empty? %>
-  			<% @results.each do |result| %>  
-    			<li id="<%= result.id %>">
+	</div>
+	
+	<%if @results %>
+        <div class="span7">
+        <ol class="microposts">
+                <% @results.each do |result| %>
+                <li id="<%= result.id %>">
                         <%= link_to gravatar_for(result.user), result.user %>
                         <span class="user">
                                 <%= link_to result.user.name, result.user %>
@@ -51,14 +56,14 @@
                                 Posted <%= time_ago_in_words(result.created_at) %> ago.
                         </span>
                         <%= link_to "Apply Now", result.user %>
-                	</li>
-
-			<%end%>
-		<%end%>
-
+                </li>
+                <% end %>
+		 <%= will_paginate @results %>
+        </ol>
+        </div>
+	<% end %>
 		<!-- <h1> Search Internships for You</h1> -->
 	</aside>
-	</div>
 	<div class="span4">
 	<h3>Recent Internships</h3>
 	<div class = "some-container">
